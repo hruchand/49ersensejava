@@ -77,10 +77,29 @@ static	String url222 = "http://"+ip+"/iot.php";
 		
 		//static String currUpTemp;
 	//	static 
-		FetchData.fetchCurTemp();
+		 FetchData.fetchCurTemp();
+		 FetchData.fetchlightData();
+		 FetchData.fetchSecurityData();
+		 FetchData.fetchLockData();
+		 FetchData.fetchDoorSensorData();
+		 FetchData.fetchMotionSensorData();
+		 FetchData.fetchWeatherData();
+		 System.out.println("upstair light stat:-"+LightUpstair.getLightStatus()+"\n");
+		 System.out.println("main light stat:-"+LightMainFloor.getLightStatus()+"\n");
+			//System.out.println("main temp:-"+ManageDB.curTempMain+"\n");
 		System.out.println("upstair temp:-"+ManageDB.curTempUp+"\n");
 		System.out.println("main temp:-"+ManageDB.curTempMain+"\n");
-
+		System.out.println("security status:-"+SecuritySystem.getSecurity_status());
+		System.out.println("front door:-"+Locks.getFront_door_status());
+		System.out.println("back door:-"+Locks.getBack_door_status());
+		System.out.println("garage door:-"+Locks.getGarage_door_status());
+System.out.println("up:-"+Door_Window_SensorsUp.getSensor_status());
+System.out.println("main:-"+Door_Window_SensorsMain.getSensor_status());
+System.out.println("upstair motion:-"+MotionDetectorUp.getMotion_detector_status());
+System.out.println("main motion:-"+MotionDetectorMain.getMotion_detector_status());
+System.out.println("Weather Temp:" + Weather.getWeather_temp());
+System.out.println("Weather Cond:" + Weather.getWeather_condition());
+System.out.println("");
 		System.out.println("Set  Control Temp for MainFloor \n");	
 		while(true)
 		{
@@ -365,14 +384,21 @@ static	String url222 = "http://"+ip+"/iot.php";
 		}	
 
 		System.out.println("above setupdata");
-	//	createTable();
+		createTable();
 		try{
-		Server.insertThermostatData(4001);
+	Thread.sleep(10000);
+			Server.insertThermostatData(4001);
+			Thread.sleep(1000);
 		Server.insertLightData(4002);
+		Thread.sleep(1000);
 		Server.insertSecData(4003);
+		Thread.sleep(1000);
 		Server.insertLockData(4004);
+		Thread.sleep(1000);
 		Server.insertDoorData(4005);
+		Thread.sleep(1000);
 		Server.insertMotionSensorData(4006);
+		Thread.sleep(1000);
 		Server.insertWeatherData(4007);
 		}
 		catch (Exception e) {

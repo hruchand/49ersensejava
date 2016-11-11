@@ -24,6 +24,15 @@ static	String str = null;
 			in = new BufferedReader(
 					new InputStreamReader(clientSocket.getInputStream()));
 			str=in.readLine();	
+			while(true)
+			{
+				if(str.equalsIgnoreCase("null")){
+					System.out.println("hello");
+				}
+				else{
+					break;
+				}
+			}
 			//in.reset();
 			in.close();
 			

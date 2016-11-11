@@ -20,7 +20,5 @@ public static void setWeather_condition(String weather_condition) {
 
 
 
-	public static void weatherSet(){
-		
-	}
+
 }
