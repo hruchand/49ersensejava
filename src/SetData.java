@@ -1,94 +1,86 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 
 public class SetData {
-public static void setMainfloorTemp(){
-	try {
-        int temp_curr;
-        String cId = "1";
-        String url = "http://"+ManageDB.ip+"/setTherCur.php";
-        URL urlObj = new URL(url);
-        String result = "";
-        String data = "cId=" + java.net.URLEncoder.encode(cId, "UTF-8");
-        String data1 = " " + java.net.URLEncoder.encode(Integer.toString(Thermostat.getCurrentTemperature()), "UTF-8");
-        //1
-        HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.setUseCaches(false);
-        conn.setRequestMethod("POST");
-        //2
-        DataOutputStream dataOut = new DataOutputStream(conn.getOutputStream());
-        dataOut.writeBytes(data);
-        dataOut.writeBytes(data1);
-        //3
-        dataOut.flush();
-        dataOut.close();
-        DataInputStream in = new DataInputStream(conn.getInputStream());
+public static void setMainfloorTemp(int port) throws Exception{
+	  try{
+     	 Thread.sleep(5000);
+     }
+     catch (Exception e) {
+//			// TODO: handle exception
+		}
+		ServerSocket listener = new ServerSocket(port);
+		listener.setReuseAddress(true);
+		
+     try {
+      
+     	while (true) {
+             Socket socket = listener.accept();
+          
+              
 
-        String g;
-        while ((g = in.readLine()) != null) {
-
-            result += g;
-
-        }
+                 String value = ManageDB.cId +" "+Thermostat.getCurrentTemperature();
+                 PrintWriter out =
+                         new PrintWriter(socket.getOutputStream(), true);
+                 out.println(value);
+                 Thread.sleep(1000);
+                 out.flush();
+                 out.close();
+                
+      
+             	socket.close();
+             	 listener.close();
+       
+         }
+     }
+    catch (Exception e) {
+		System.out.println(e.getMessage());
+	} 
         
-
-        in.close();
-        //Log.d("fetchdata", "value" + result);
-        //String[] numbersArray = result.split(" ");
-       // current_temp_upstairs = Integer.parseInt(numbersArray[0]);
-       // current_temp_main = Integer.parseInt(numbersArray[1]);
-    }
-    catch (Exception e){
-
-    }
+     
 }
 
-public static void setThermDataup (){
+public static void setThermDataup (int port) throws Exception{
 
-    try {
-     
-        String cId = "1";
-        String url = "http://"+ManageDB.ip+"/setTherupCur.php";
-        URL urlObj = new URL(url);
-        String result = "";
-        String data = "cId=" + java.net.URLEncoder.encode(cId, "UTF-8");
-        String data1 = " " + java.net.URLEncoder.encode(Integer.toString(ThermostatUpstair.getCurrentTemperature()), "UTF-8");
-        //1
-        HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.setUseCaches(false);
-        conn.setRequestMethod("POST");
-        //2
-        DataOutputStream dataOut = new DataOutputStream(conn.getOutputStream());
-        dataOut.writeBytes(data);
-        dataOut.writeBytes(data1);
-        //3
-        dataOut.flush();
-        dataOut.close();
-        DataInputStream in = new DataInputStream(conn.getInputStream());
+	  try{
+	     	 Thread.sleep(5000);
+	     }
+	     catch (Exception e) {
+//				// TODO: handle exception
+			}
+			ServerSocket listener = new ServerSocket(port);
+			listener.setReuseAddress(true);
+			
+	     try {
+	      
+	     	while (true) {
+	             Socket socket = listener.accept();
+	          
+	              
 
-        String g;
-        while ((g = in.readLine()) != null) {
-
-            result += g;
-
-        }
-       
-
-        in.close();
-        //Log.d("fetchdata", "value" + result);
-        //String[] numbersArray = result.split(" ");
-        // current_temp_upstairs = Integer.parseInt(numbersArray[0]);
-        // current_temp_main = Integer.parseInt(numbersArray[1]);
-    }
-    catch (Exception e){
-
-    }
+	                 String value = ManageDB.cId +" "+ThermostatUpstair.getCurrentTemperature();
+	                 PrintWriter out =
+	                         new PrintWriter(socket.getOutputStream(), true);
+	                 out.println(value);
+	                 Thread.sleep(1000);
+	                 out.flush();
+	                 out.close();
+	                
+	      
+	             	socket.close();
+	             	 listener.close();
+	       
+	         }
+	     }
+	    catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
+	        
 
 
 }

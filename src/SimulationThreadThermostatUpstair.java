@@ -13,14 +13,15 @@ Thread thread = new Thread(this);
 				break;
 			}
             switch (ThermostatUpstair.getMode()) {
-
                 case "heat":
-                    Thread.sleep(1000);                    
+ System.out.println("Upstair temp:" +ThermostatUpstair.getCurrentTemperature());
+ System.out.println("Upstair Control Temp:" +ThermostatUpstair.getControlTemperature());
+                	Thread.sleep(1000);                    
                     if (ThermostatUpstair.getCurrentTemperature() < ThermostatUpstair.getControlTemperature() && ThermostatUpstair.getCurrentTemperature() < 80) {
                         Thread.sleep(1000);
                         ThermostatUpstair.setCurrentTemperature(ThermostatUpstair.getCurrentTemperature()+1); 
                         System.out.println("\nCurrent Temperature of Upstair:"+ThermostatUpstair.getCurrentTemperature());
-                        SetData.setThermDataup();
+                        SetData.setThermDataup(5002);
                         System.out.println("\nCurrent energy consumption of Upstair:"+ThermostatUpstair.EnergyConsumption(ThermostatUpstair.getCurrentTemperature()));
                     }
                     break;
@@ -31,7 +32,7 @@ Thread thread = new Thread(this);
                         Thread.sleep(1000);
                         ThermostatUpstair.setCurrentTemperature(ThermostatUpstair.getCurrentTemperature()-1);
                         System.out.println("\nCurrent Temperature of Upstair:"+ThermostatUpstair.getCurrentTemperature());
-                        SetData.setThermDataup();
+                        SetData.setThermDataup(5002);
                         System.out.println("\nCurrent energy consumption of Upstair:"+ThermostatUpstair.EnergyConsumption(ThermostatUpstair.getCurrentTemperature()));
                         }
                 break;

@@ -13,16 +13,20 @@ Thread thread = new Thread(this);
 				break;
 			}
 			System.out.println("inside thermostata simulation main");
+			System.out.println("thermostat mode:-"+Thermostat.getMode());
             switch (Thermostat.getMode()) {
                 case "heat":
                     Thread.sleep(1000);
-                                 
+                    System.out.println("thermostatinside switch :-"+Thermostat.getMode());
+                    System.out.println("con temp in sim:-"+Thermostat.getControlTemperature());
+                    System.out.println("current temp in sim:-"+Thermostat.getCurrentTemperature());
                     if (Thermostat.getCurrentTemperature() < Thermostat.getControlTemperature() && Thermostat.getCurrentTemperature() < 80) {
-
+System.out.println("inside if of main thermostat");
                         Thread.sleep(1000);
                         Thermostat.setCurrentTemperature(Thermostat.getCurrentTemperature()+1);
                         System.out.println("\nCurrent Temperature of Main Floor:"+Thermostat.getCurrentTemperature());
-                        SetData.setMainfloorTemp();
+                       SetData.setMainfloorTemp(5001);
+                  //      SetData.setMainfloorTemp(5001);
                         System.out.println("\nCurrent energy consumption of Main Floor:"+Thermostat.EnergyConsumption(Thermostat.getCurrentTemperature()));
                     }
                     break;
@@ -32,7 +36,7 @@ Thread thread = new Thread(this);
                         Thread.sleep(1000);
                         Thermostat.setCurrentTemperature(Thermostat.getCurrentTemperature()-1);
                         System.out.println("\nCurrent Temperature of Main Floor:"+Thermostat.getCurrentTemperature());
-                        SetData.setMainfloorTemp();
+                        SetData.setMainfloorTemp(5001);
                         System.out.println("\nCurrent energy consumption of Main Floor:"+Thermostat.EnergyConsumption(Thermostat.getCurrentTemperature()));
                     }
                 break;

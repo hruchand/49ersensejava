@@ -43,9 +43,10 @@ public class Thermostat extends RPI1{
 
     private static String fanStatus = "off";
 	public Thermostat(int controlTemp, String mode){
+		System.out.println("before the cons");
 	this.controlTemperature= controlTemp;
 	this.mode=mode;
-
+System.out.println("inside the constructor");
 	
 	}
 	

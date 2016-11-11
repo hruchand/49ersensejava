@@ -31,7 +31,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.sun.jna.platform.win32.SetupApi;
 
 public class ManageDB {
-	static String ip="10.0.0.2";
+	static String ip="192.168.1.3";
 static	String url222 = "http://"+ip+"/iot.php";
 	
 	static	String cId ="1";
@@ -70,10 +70,10 @@ static	String url222 = "http://"+ip+"/iot.php";
 		String thermoStatModeUpstair;
 		String fanModeUpstair;
 		String curDate ="12-2-2014";
-		String tmodeU ="23";
-		String tmodeM ="34";
-		String tEnergyU ="45";
-		String tEnergyM ="56";
+	//	String tmodeU ="23";
+	//	String tmodeM ="34";
+	//	String tEnergyU ="45";
+	//	String tEnergyM ="56";
 		
 		//static String currUpTemp;
 	//	static 
@@ -365,14 +365,26 @@ static	String url222 = "http://"+ip+"/iot.php";
 		}	
 
 		System.out.println("above setupdata");
-		createTable();
-		InsertData.insertThermostatData();	
-		InsertData.insertLightData();	
-		InsertData.insertSecurity();
-		InsertData.insertLocks();
-		InsertData.insertDoorSensor();
-		InsertData.insertMotionSensor();
-		InsertData.insertWeather();
+	//	createTable();
+		try{
+		Server.insertThermostatData(4001);
+		Server.insertLightData(4002);
+		Server.insertSecData(4003);
+		Server.insertLockData(4004);
+		Server.insertDoorData(4005);
+		Server.insertMotionSensorData(4006);
+		Server.insertWeatherData(4007);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+//		InsertData.insertThermostatData();	
+//		InsertData.insertLightData();	
+//		InsertData.insertSecurity();
+//		InsertData.insertLocks();
+//		InsertData.insertDoorSensor();
+//		InsertData.insertMotionSensor();
+//		InsertData.insertWeather();
 		//test();
 	}
 
